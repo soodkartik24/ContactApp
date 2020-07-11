@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="contactViewModel"
+            type="com.kartik.contactapplicationkotlin.domain.contactsList.ContactsListViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".domain.contactsList.MainActivity">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:theme="@style/ToolBarStyle">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="@{contactViewModel.showSearchView ? View.VISIBLE : View.GONE}"
+                app:queryHint="@{contactViewModel.searchViewText}"
+                tools:visibility="gone" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/loading_contacts_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/loading_contacts"
+            android:visibility="@{contactViewModel.showLoadingContactsPlaceHolder ? View.VISIBLE : View.GONE, default = gone}"
+            tools:text="@string/loading_contacts"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/no_contact_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/no_contacts_found"
+            android:visibility="@{contactViewModel.showNoContactsPlaceHolder ? View.VISIBLE : View.GONE, default = gone}"
+            tools:text="@string/no_contacts_found"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/contacts_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            tools:itemCount="10"
+            tools:listitem="@layout/contacts_list_items" />
+
+    </RelativeLayout>
+</layout>
