@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/asc"
+        android:title="@string/sort_by_ascending" />
+
+    <item
+        android:id="@+id/desc"
+        android:title="@string/sort_by_descending" />
+    <item
+        android:id="@+id/searchbyname"
+        android:title="@string/search_by_name" />
+    <item
+        android:id="@+id/searchbynumber"
+        android:title="@string/search_by_number" />
+</menu>

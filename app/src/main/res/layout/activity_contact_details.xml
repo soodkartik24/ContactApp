@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.kartik.contactapplicationkotlin.domain.contactDetails.ContactDetailsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".domain.contactDetails.ContactDetailsActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:theme="@style/ToolBarStyle">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/contact_detail"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@id/edit_icon"
+                    android:background="@null"
+                    android:onClick="@{() -> viewModel.deleteContact()}"
+                    android:padding="10dp"
+                    android:src="@drawable/delete_icon"
+                    android:visibility="@{viewModel.isEdit ? View.GONE : View.VISIBLE}"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/edit_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@null"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="@{() -> viewModel.editContact(true)}"
+                    android:padding="10dp"
+                    android:src="@drawable/edit_icon"
+                    android:visibility="@{viewModel.isEdit ? View.GONE : View.VISIBLE}" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@null"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="@{() -> viewModel.editContact(false)}"
+                    android:padding="10dp"
+                    android:src="@drawable/clear_icon"
+                    android:visibility="@{viewModel.isEdit ? View.VISIBLE : View.GONE}"
+                    tools:visibility="gone" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/contact_profile_image"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="24dp"
+            android:src="@drawable/account_circle_black" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.isEdit}"
+                android:hint="@string/name"
+                android:text="@={viewModel.name}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.isEdit}"
+                android:hint="@string/phone_number"
+                android:text="@={viewModel.phoneNumber}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.isEdit}"
+                android:hint="@string/email"
+                android:text="@={viewModel.email}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> viewModel.updateContactDetails()}"
+            android:text="@string/update"
+            android:visibility="@{viewModel.isEdit ? View.VISIBLE : View.GONE}" />
+    </LinearLayout>
+</layout>
